@@ -160,7 +160,6 @@
   "queryAllDeclaredConstructors":true,
   "methods":[
     {"name":"<init>","parameterTypes":["java.lang.String","io.github.freya022.rimstart.ActiveMods","io.github.freya022.rimstart.KnownExpansions"] }, 
-    {"name":"<init>","parameterTypes":["java.lang.String","java.util.List","java.util.List"] }, 
     {"name":"getActiveMods","parameterTypes":[] }, 
     {"name":"getKnownExpansions","parameterTypes":[] }, 
     {"name":"getVersion","parameterTypes":[] }
@@ -225,10 +224,6 @@
   "name":"java.util.PropertyPermission"
 },
 {
-  "name":"javafx.application.Platform",
-  "methods":[{"name":"startup","parameterTypes":["java.lang.Runnable"] }]
-},
-{
   "name":"javafx.scene.Camera"
 },
 {
@@ -275,10 +270,6 @@
 },
 {
   "name":"javafx.stage.Window"
-},
-{
-  "name":"kotlinx.coroutines.javafx.JavaFxDispatcherFactory",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
   "name":"sun.security.provider.MD5",

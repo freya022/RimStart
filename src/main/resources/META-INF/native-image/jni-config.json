@@ -126,14 +126,6 @@
   ]
 },
 {
-  "name":"io.github.freya022.rimstart.Main",
-  "methods":[{"name":"main","parameterTypes":["java.lang.String[]"] }]
-},
-{
-  "name":"java.lang.Boolean",
-  "methods":[{"name":"getBoolean","parameterTypes":["java.lang.String"] }]
-},
-{
   "name":"java.lang.Class",
   "methods":[{"name":"forName","parameterTypes":["java.lang.String","boolean","java.lang.ClassLoader"] }]
 },
