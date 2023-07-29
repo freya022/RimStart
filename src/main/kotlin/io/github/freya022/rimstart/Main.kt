@@ -13,10 +13,12 @@ import io.github.oshai.kotlinlogging.KotlinLogging
 import javafx.application.Application
 import javafx.application.Platform
 import javafx.geometry.Insets
+import javafx.geometry.Pos
 import javafx.scene.Scene
 import javafx.scene.control.Button
 import javafx.scene.control.OverrunStyle
 import javafx.scene.layout.GridPane
+import javafx.scene.layout.VBox
 import javafx.stage.Stage
 import kotlin.io.path.*
 import kotlin.system.exitProcess
@@ -91,11 +93,9 @@ class App : Application() {
         val modsConfigFile = modsConfigPath.toFile()
         val modsConfig = xmlMapper.readValue(modsConfigFile, ModsConfig::class.java)
 
-        val root = GridPane().apply {
+        val grid = GridPane().apply {
             hgap = 10.0
             vgap = 10.0
-
-            padding = Insets(10.0, 10.0, 10.0, 10.0)
 
             rwListFolderPath.walk()
                 .filter { it.extension == "rml" }
@@ -135,6 +135,18 @@ class App : Application() {
                 .forEachIndexed { index, buttons ->
                     addRow(index, *buttons.toTypedArray())
                 }
+        }
+
+        val root = VBox(10.0).apply {
+            padding = Insets(10.0, 10.0, 10.0, 10.0)
+            alignment = Pos.TOP_CENTER
+
+            children += grid
+            children += Button("Open RimWorld folder").apply {
+                setOnAction {
+                    hostServices.showDocument(rwFolderPath.toUri().toString())
+                }
+            }
         }
 
         primaryStage.apply {
