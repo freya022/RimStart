@@ -130,11 +130,41 @@
   "methods":[{"name":"createRenderer","parameterTypes":["com.sun.scenario.effect.FilterContext"] }]
 },
 {
+  "name":"io.github.freya022.rimstart.ActiveMods",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[
+    {"name":"<init>","parameterTypes":["java.util.List"] }, 
+    {"name":"getLi","parameterTypes":[] }
+  ]
+},
+{
+  "name":"io.github.freya022.rimstart.App",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.github.freya022.rimstart.KnownExpansions",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[
+    {"name":"<init>","parameterTypes":["java.util.List"] }, 
+    {"name":"getLi","parameterTypes":[] }
+  ]
+},
+{
   "name":"io.github.freya022.rimstart.ModsConfig",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"<init>","parameterTypes":["java.lang.String","java.util.List","java.util.List"] }]
+  "methods":[
+    {"name":"<init>","parameterTypes":["java.lang.String","io.github.freya022.rimstart.ActiveMods","io.github.freya022.rimstart.KnownExpansions"] }, 
+    {"name":"<init>","parameterTypes":["java.lang.String","java.util.List","java.util.List"] }, 
+    {"name":"getActiveMods","parameterTypes":[] }, 
+    {"name":"getKnownExpansions","parameterTypes":[] }, 
+    {"name":"getVersion","parameterTypes":[] }
+  ]
 },
 {
   "name":"io.github.freya022.rimstart.RWList",
