@@ -11,6 +11,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator
 import io.github.oshai.kotlinlogging.KotlinLogging
 import javafx.application.Application
+import javafx.application.Platform
 import javafx.geometry.Insets
 import javafx.scene.Scene
 import javafx.scene.control.Button
@@ -114,11 +115,17 @@ class App : Application() {
                         textOverrun = OverrunStyle.LEADING_WORD_ELLIPSIS
                         isDefaultButton = isCurrentConfig
 
+                        if (isCurrentConfig) {
+                            Platform.runLater { requestFocus() }
+                        }
+
                         setOnAction {
                             logger.info { "Switching mod list to '${path.nameWithoutExtension}'" }
 
-                            modsConfigPath.moveTo(modsConfigPath.resolveSibling("ModsConfig.xml.bak"), overwrite = true)
-                            xmlMapper.writeValue(modsConfigFile, rwListAsModsConfig)
+                            if (!isCurrentConfig) {
+                                modsConfigPath.moveTo(modsConfigPath.resolveSibling("ModsConfig.xml.bak"), overwrite = true)
+                                xmlMapper.writeValue(modsConfigFile, rwListAsModsConfig)
+                            }
                             hostServices.showDocument("steam://rungameid/294100")
                             exitProcess(0)
                         }
