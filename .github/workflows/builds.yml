@@ -1,0 +1,27 @@
+name: RimStart Native Image builds
+on:
+  push:
+    branches: ["master"]
+jobs:
+  build:
+    name: RimStart on Windows
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: graalvm/setup-graalvm@v1
+        with:
+          java-version: '17.0.7'
+          distribution: 'graalvm'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          cache: 'maven'
+
+      - name: Build RimStart
+        run: |
+          mvn -B gluonfx:build
+      
+      - name: Upload binary
+        uses: actions/upload-artifact@v2
+        with:
+          name: RimStart-windows-latest
+          path: target/gluonfx/**/RimStart*
