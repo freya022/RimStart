@@ -24,12 +24,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: graalvm/setup-graalvm@v1
+      - uses: gluonhq/setup-graalvm@6eecc74f9ad1f028b863d7a494e351668a1b0370
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          java-version: '17.0.7'
-          distribution: 'graalvm'
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          cache: 'maven'
+          jdk: 'java17'
+          arch: 'x86_64'
 
       - name: Build RimStart
         run: |
