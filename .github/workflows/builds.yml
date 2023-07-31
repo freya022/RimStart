@@ -1,11 +1,25 @@
 name: RimStart Native Image builds
+
 on:
   push:
     branches: ["master"]
+
+permissions:
+  contents: write
+
 jobs:
+  create-release:
+    name: Create release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create release
+        uses: softprops/action-gh-release@v1
   build:
-    name: RimStart on Windows
-    runs-on: windows-latest
+    name: Build native RimStart
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
 
@@ -20,8 +34,18 @@ jobs:
         run: |
           mvn -B gluonfx:build
       
-      - name: Upload binary
-        uses: actions/upload-artifact@v2
+      - name: Add Windows assets to release
+        if: ${{ matrix.os == 'windows-latest' }}
+        uses: actions/upload-release-asset@v1
         with:
-          name: RimStart-windows-latest
-          path: target/gluonfx/**/RimStart*
+          upload_url: ${{ steps.create-release.outputs.upload_url }}
+          asset_path: target/gluonfx/x86_64-windows/RimStart.exe
+          asset_content_type: application/vnd.microsoft.portable-executable
+
+      - name: Add Linux assets to release
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create-release.outputs.upload_url }}
+          asset_path: target/gluonfx/x86_64-linux/RimStart
+          asset_content_type: application/x-executable
