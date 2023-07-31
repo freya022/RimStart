@@ -2,7 +2,8 @@ name: RimStart Native Image builds
 
 on:
   push:
-    branches: ["master"]
+    tags:
+      - "v*.*.*"
 
 permissions:
   contents: write
