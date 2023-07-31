@@ -81,8 +81,14 @@ class App : Application() {
         configure(SerializationFeature.INDENT_OUTPUT, true)
     }
 
-    private val rwFolderPath =
-        Path(System.getenv("appdata"), "..", "LocalLow", "Ludeon Studios", "RimWorld by Ludeon Studios")
+    private val rwFolderPath = when {
+        System.getProperty("os.name").startsWith("Windows") ->
+            Path(System.getenv("USERPROFILE"), "AppData", "LocalLow", "Ludeon Studios", "RimWorld by Ludeon Studios")
+        System.getProperty("os.name").startsWith("Mac OS") ->
+            throw IllegalArgumentException("This app does not run on macOS")
+        else ->
+            Path("~", ".config", "unity3d", "Ludeon Studios", "RimWorld by Ludeon Studios", "Saves")
+    }
     private val modsConfigPath = rwFolderPath.resolve("Config").resolve("ModsConfig.xml")
     private val rwListFolderPath = rwFolderPath.resolve("ModLists")
 
