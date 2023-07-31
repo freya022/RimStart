@@ -57,6 +57,8 @@ jobs:
       - name: Add Windows assets to release
         if: ${{ matrix.os == 'windows-latest' }}
         uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.create-release.outputs.upload_url }}
           asset_path: target/gluonfx/x86_64-windows/RimStart.exe
@@ -66,6 +68,8 @@ jobs:
       - name: Add Linux assets to release
         if: ${{ matrix.os == 'ubuntu-latest' }}
         uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.create-release.outputs.upload_url }}
           asset_path: target/gluonfx/x86_64-linux/RimStart
