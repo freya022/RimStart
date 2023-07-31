@@ -21,8 +21,17 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
+    needs: [create-release]
     steps:
       - uses: actions/checkout@v3
+
+      - name: Add msbuild to PATH
+        if: ${{ matrix.os == 'windows-latest' }}
+        uses: microsoft/setup-msbuild@v1.0.2
+
+      - name: Visual Studio shell
+        if: ${{ matrix.os == 'windows-latest' }}
+        uses: egor-tensin/vs-shell@v1
 
       - uses: gluonhq/setup-graalvm@6eecc74f9ad1f028b863d7a494e351668a1b0370
         env:
